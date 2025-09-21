@@ -1,11 +1,11 @@
-import React from 'react';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from './ui/dialog';
+import { memo } from 'react';
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from './ui/dialog';
 
-import { ImageToolPanel } from './tools/ImageToolPanel';
-import { DocumentToolPanel } from './tools/DocumentToolPanel';
 import { AudioToolPanel } from './tools/AudioToolPanel';
-import { FontToolPanel } from './tools/FontToolPanel';
+import { DocumentToolPanel } from './tools/DocumentToolPanel';
 import { DownloadToolPanel } from './tools/DownloadToolPanel';
+import { FontToolPanel } from './tools/FontToolPanel';
+import { ImageToolPanel } from './tools/ImageToolPanel';
 
 interface ToolModalProps {
   isOpen: boolean;
@@ -14,7 +14,7 @@ interface ToolModalProps {
   toolTitle: string;
 }
 
-export function ToolModal({ isOpen, onClose, toolType, toolTitle }: ToolModalProps) {
+const ToolModal = memo<ToolModalProps>(({ isOpen, onClose, toolType, toolTitle }) => {
   const getToolDescription = (type: string) => {
     switch (type) {
       case 'download':
@@ -60,11 +60,15 @@ export function ToolModal({ isOpen, onClose, toolType, toolTitle }: ToolModalPro
             {getToolDescription(toolType)}
           </DialogDescription>
         </DialogHeader>
-        
+
         <div className="mt-6">
           {renderToolPanel()}
         </div>
       </DialogContent>
     </Dialog>
   );
-}
+});
+
+ToolModal.displayName = 'ToolModal';
+
+export { ToolModal };

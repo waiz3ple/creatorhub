@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { Input } from './ui/input';
+import { ArrowRight, Download, Facebook, Github, Globe, Instagram, Linkedin, Sparkles, Twitter, Youtube } from 'lucide-react';
+import { AnimatePresence, motion } from 'motion/react';
+import { memo, useEffect, useState } from 'react';
 import { Button } from './ui/button';
-import { Download, Youtube, Linkedin, Twitter, Instagram, Facebook, Github, Globe, Sparkles, ArrowRight } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
+import { Input } from './ui/input';
 
 interface SiteConfig {
   pattern: RegExp;
@@ -23,7 +23,7 @@ const siteConfigs: SiteConfig[] = [
   {
     pattern: /linkedin\.com/i,
     icon: <Linkedin className="h-5 w-5" />,
-    name: 'LinkedIn', 
+    name: 'LinkedIn',
     color: 'text-blue-600',
     gradient: 'from-blue-500 to-blue-600'
   },
@@ -61,7 +61,7 @@ interface DynamicSearchBarProps {
   isConsented?: boolean;
 }
 
-export function DynamicSearchBar({ isConsented = true }: DynamicSearchBarProps) {
+const DynamicSearchBar = memo<DynamicSearchBarProps>(({ isConsented = true }) => {
   const [url, setUrl] = useState('');
   const [detectedSite, setDetectedSite] = useState<SiteConfig | null>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -78,26 +78,26 @@ export function DynamicSearchBar({ isConsented = true }: DynamicSearchBarProps) 
 
   const handleDownload = async () => {
     if (!url.trim()) return;
-    
+
     if (!isConsented) {
       // Scroll to footer to show consent checkbox
       const footer = document.querySelector('footer');
       footer?.scrollIntoView({ behavior: 'smooth' });
       return;
     }
-    
+
     setIsLoading(true);
     // Simulate download process
     await new Promise(resolve => setTimeout(resolve, 2000));
     setIsLoading(false);
-    
+
     // Show success message (in a real app, this would trigger actual download)
     alert(`Download started for: ${detectedSite?.name || 'website'} content`);
   };
 
   return (
     <div className="w-full max-w-3xl mx-auto">
-      <motion.div 
+      <motion.div
         className="relative"
         animate={{ scale: isFocused ? 1.02 : 1 }}
         transition={{ duration: 0.2 }}
@@ -106,14 +106,14 @@ export function DynamicSearchBar({ isConsented = true }: DynamicSearchBarProps) 
         <div className="relative group">
           {/* Background glow effect */}
           <div className={`
-            absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 
+            absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20
             rounded-2xl blur-xl transition-opacity duration-300
             ${isFocused ? 'opacity-100' : 'opacity-0'}
           `} />
-          
+
           {/* Search input container */}
           <div className="relative flex items-center bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl rounded-2xl border border-gray-200/50 dark:border-gray-700/50 shadow-xl hover:shadow-2xl transition-all duration-300">
-            
+
             {/* URL Input */}
             <div className="flex-1 relative">
               <Input
@@ -125,7 +125,7 @@ export function DynamicSearchBar({ isConsented = true }: DynamicSearchBarProps) 
                 onBlur={() => setIsFocused(false)}
                 className="h-16 bg-transparent border-0 text-lg placeholder:text-gray-400 focus:ring-0 focus:outline-none pl-6 pr-20"
               />
-              
+
               {/* Site detection indicator */}
               <AnimatePresence>
                 {detectedSite && (
@@ -151,7 +151,7 @@ export function DynamicSearchBar({ isConsented = true }: DynamicSearchBarProps) 
                 )}
               </AnimatePresence>
             </div>
-            
+
             {/* Download Button */}
             <div className="p-2">
               <Button
@@ -159,8 +159,8 @@ export function DynamicSearchBar({ isConsented = true }: DynamicSearchBarProps) 
                 disabled={!url.trim() || isLoading}
                 className={`
                   h-12 px-6 rounded-xl font-medium transition-all duration-300
-                  ${detectedSite 
-                    ? `bg-gradient-to-r ${detectedSite.gradient} hover:shadow-lg ${isConsented ? 'hover:scale-105' : ''} text-white` 
+                  ${detectedSite
+                    ? `bg-gradient-to-r ${detectedSite.gradient} hover:shadow-lg ${isConsented ? 'hover:scale-105' : ''} text-white`
                     : 'bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white'
                   }
                   ${!isConsented ? 'opacity-75' : ''}
@@ -184,7 +184,7 @@ export function DynamicSearchBar({ isConsented = true }: DynamicSearchBarProps) 
             </div>
           </div>
         </div>
-        
+
         {/* Detection feedback */}
         <AnimatePresence>
           {detectedSite && (
@@ -238,4 +238,8 @@ export function DynamicSearchBar({ isConsented = true }: DynamicSearchBarProps) 
       </motion.div>
     </div>
   );
-}
+});
+
+DynamicSearchBar.displayName = 'DynamicSearchBar';
+
+export { DynamicSearchBar };
