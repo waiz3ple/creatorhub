@@ -1,72 +1,28 @@
-import React, { useState } from 'react';
-import { DynamicSearchBar } from './components/DynamicSearchBar';
-import { ToolModal } from './components/ToolModal';
-import { FooterConsent } from './components/FooterConsent';
-import { 
-  Image,
-  FileText, 
-  Music2, 
-  Type, 
-  Sparkles, 
-  ArrowRight
-} from 'lucide-react';
+import { ArrowRight, Sparkles } from 'lucide-react';
 import { motion } from 'motion/react';
 
-const tools = [
-  {
-    id: 'image',
-    title: 'Image Processor', 
-    description: 'Compress, resize, and convert images',
-    icon: Image,
-    color: 'from-emerald-500 to-emerald-600',
-    hoverColor: 'from-emerald-600 to-emerald-700',
-    shadowColor: 'shadow-emerald-500/25'
-  },
-  {
-    id: 'document',
-    title: 'Document Converter',
-    description: 'Convert and process documents',
-    icon: FileText,
-    color: 'from-indigo-500 to-indigo-600',
-    hoverColor: 'from-indigo-600 to-indigo-700',
-    shadowColor: 'shadow-indigo-500/25'
-  },
-  {
-    id: 'audio',
-    title: 'Audio Processor',
-    description: 'Convert and process audio files',
-    icon: Music2,
-    color: 'from-purple-500 to-purple-600',
-    hoverColor: 'from-purple-600 to-purple-700',
-    shadowColor: 'shadow-purple-500/25'
-  },
-  {
-    id: 'font',
-    title: 'Font Optimizer',
-    description: 'Convert and optimize web fonts',
-    icon: Type,
-    color: 'from-orange-500 to-orange-600',
-    hoverColor: 'from-orange-600 to-orange-700',
-    shadowColor: 'shadow-orange-500/25'
-  }
-];
+// Components
+import { DynamicSearchBar } from './components/DynamicSearchBar';
+import { FooterConsent } from './components/FooterConsent';
+import { ToolModal } from './components/ToolModal';
+
+// Custom hooks
+import { useToolModal } from './hooks';
+
+// Constants and types
+import { TOOLS } from './constants';
+import type { Tool } from './types';
 
 export default function App() {
-  const [selectedTool, setSelectedTool] = useState<string | null>(null);
-  const [selectedToolTitle, setSelectedToolTitle] = useState<string>('');
-  const [isToolModalOpen, setIsToolModalOpen] = useState(false);
-
+  // Use the custom hook for modal management
+  const { isOpen, selectedToolId, selectedToolTitle, openModal, closeModal } = useToolModal();
 
   const handleToolSelect = (toolId: string, toolTitle: string) => {
-    setSelectedTool(toolId);
-    setSelectedToolTitle(toolTitle);
-    setIsToolModalOpen(true);
+    openModal(toolId, toolTitle);
   };
 
   const handleCloseToolModal = () => {
-    setIsToolModalOpen(false);
-    setSelectedTool(null);
-    setSelectedToolTitle('');
+    closeModal();
   };
 
   return (
@@ -86,14 +42,14 @@ export default function App() {
         className="relative z-10 min-h-screen flex flex-col"
       >
         {/* Header */}
-        <motion.header 
+        <motion.header
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
           className="pt-16 pb-8"
         >
           <div className="container mx-auto px-6 text-center">
-            <motion.div 
+            <motion.div
               initial={{ scale: 0.9 }}
               animate={{ scale: 1 }}
               transition={{ delay: 0.3, duration: 0.4 }}
@@ -134,7 +90,7 @@ export default function App() {
                 Enter a link from YouTube, Instagram, LinkedIn, or any supported platform
               </p>
             </div>
-            
+
             <DynamicSearchBar isConsented={true} />
           </motion.div>
 
@@ -155,7 +111,7 @@ export default function App() {
             </div>
 
             <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {tools.map((tool, index) => (
+              {TOOLS.map((tool: Tool, index: number) => (
                 <motion.div
                   key={tool.id}
                   initial={{ opacity: 0, y: 20 }}
@@ -169,8 +125,8 @@ export default function App() {
                     whileTap={{ scale: 0.98 }}
                     onClick={() => handleToolSelect(tool.id, tool.title)}
                     className={`
-                      w-full aspect-square p-6 rounded-3xl 
-                      bg-white/80 dark:bg-gray-800/80 
+                      w-full aspect-square p-6 rounded-3xl
+                      bg-white/80 dark:bg-gray-800/80
                       backdrop-blur-sm border border-gray-200/50 dark:border-gray-700/50
                       shadow-lg transition-all duration-300 ease-out
                       flex flex-col items-center justify-center text-center
@@ -180,10 +136,10 @@ export default function App() {
                   >
                     {/* Hover gradient overlay */}
                     <div className={`
-                      absolute inset-0 bg-gradient-to-br ${tool.hoverColor} opacity-0 
+                      absolute inset-0 bg-gradient-to-br ${tool.hoverColor} opacity-0
                       group-hover:opacity-5 transition-opacity duration-300
                     `} />
-                    
+
                     {/* Icon */}
                     <div className={`
                       relative z-10 p-4 rounded-2xl bg-gradient-to-br ${tool.color}
@@ -192,7 +148,7 @@ export default function App() {
                     `}>
                       <tool.icon className="h-8 w-8 text-white" />
                     </div>
-                    
+
                     {/* Text */}
                     <div className="relative z-10">
                       <h4 className="font-semibold text-gray-900 dark:text-white mb-2 text-sm leading-tight">
@@ -219,17 +175,17 @@ export default function App() {
         </main>
 
         {/* Footer with Consent */}
-        <FooterConsent 
-          isConsented={true} 
-          onConsentChange={() => {}} 
+        <FooterConsent
+          isConsented={true}
+          onConsentChange={() => {}}
         />
       </motion.div>
 
       {/* Tool Modal */}
       <ToolModal
-        isOpen={isToolModalOpen}
+        isOpen={isOpen}
         onClose={handleCloseToolModal}
-        toolType={selectedTool || ''}
+        toolType={selectedToolId || ''}
         toolTitle={selectedToolTitle}
       />
     </div>
