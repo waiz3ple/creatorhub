@@ -1,6 +1,7 @@
 {
       "name": "creatorhub",
       "version": "0.1.0",
+      "description": "A modern web toolkit for content creators featuring image processing, document conversion, audio optimization, and font tools built with React and TypeScript.",
       "home": "https://waiz3ple.github.io/creatorhub",
       "private": true,
       "dependencies": {
