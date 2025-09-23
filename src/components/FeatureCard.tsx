@@ -1,7 +1,9 @@
-import { ChevronRight, LucideIcon } from 'lucide-react';
-import { motion } from 'motion/react';
-import { Button } from './ui/button';
+import React from 'react';
 import { Card } from './ui/card';
+import { Button } from './ui/button';
+import { LucideIcon } from 'lucide-react';
+import { motion } from 'motion/react';
+import { ChevronRight } from 'lucide-react';
 
 interface FeatureCardProps {
   title: string;
@@ -26,11 +28,11 @@ export function FeatureCard({ title, description, icon: Icon, features, color, i
       <Card className="h-full p-6 bg-white/95 dark:bg-gray-800/95 backdrop-blur-lg border border-gray-200/50 dark:border-gray-700/50 shadow-xl hover:shadow-2xl transition-all duration-500 group relative overflow-hidden">
         {/* Professional gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-br from-white/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
+        
         <div className="relative flex flex-col h-full">
           {/* Icon and Title */}
           <div className="flex flex-col items-center text-center mb-6">
-            <motion.div
+            <motion.div 
               whileHover={{ scale: 1.1, rotate: 5 }}
               transition={{ duration: 0.3 }}
               className={`p-4 rounded-2xl ${color} shadow-lg mb-4 group-hover:shadow-xl transition-all duration-300`}
@@ -41,12 +43,12 @@ export function FeatureCard({ title, description, icon: Icon, features, color, i
               {title}
             </h3>
           </div>
-
+          
           {/* Description */}
           <p className="text-gray-600 dark:text-gray-400 mb-6 flex-grow text-sm leading-relaxed text-center">
             {description}
           </p>
-
+          
           {/* Features */}
           <div className="space-y-3 mb-6">
             {features.slice(0, 4).map((feature, idx) => (
@@ -56,9 +58,9 @@ export function FeatureCard({ title, description, icon: Icon, features, color, i
               </div>
             ))}
           </div>
-
+          
           {/* Professional Action Button */}
-          <Button
+          <Button 
             onClick={() => onOpenTool(toolType, title)}
             className={`w-full ${color} hover:opacity-90 text-white border-0 shadow-lg group-hover:shadow-xl transition-all duration-300 font-semibold text-sm py-3 relative overflow-hidden`}
           >

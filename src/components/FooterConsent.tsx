@@ -1,6 +1,6 @@
-import { AlertTriangle, ChevronDown, ChevronUp, Download, Eye, Globe, Lock, Shield, Star } from 'lucide-react';
-import { AnimatePresence, motion } from 'motion/react';
-import { memo, useState } from 'react';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
+import { ChevronDown, ChevronUp, Shield, AlertTriangle, Eye, Download, Lock, Star, Globe } from 'lucide-react';
 import { Checkbox } from './ui/checkbox';
 
 interface FooterConsentProps {
@@ -8,7 +8,7 @@ interface FooterConsentProps {
   onConsentChange: (consented: boolean) => void;
 }
 
-const FooterConsent = memo<FooterConsentProps>(({ isConsented, onConsentChange }) => {
+export function FooterConsent({ isConsented, onConsentChange }: FooterConsentProps) {
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
@@ -20,7 +20,7 @@ const FooterConsent = memo<FooterConsentProps>(({ isConsented, onConsentChange }
     >
       <div className="container mx-auto px-6">
         <div className="max-w-4xl mx-auto">
-
+          
           {/* Consent Checkbox */}
           <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-gray-200/50 dark:border-gray-700/50 mb-6">
             <div className="flex items-start space-x-4">
@@ -41,7 +41,7 @@ const FooterConsent = memo<FooterConsentProps>(({ isConsented, onConsentChange }
                     Check this box to use the tools. By checking this, you acknowledge the terms below and agree to use CreatorHub for educational purposes only.
                   </p>
                 </label>
-
+                
                 <motion.button
                   onClick={() => setIsExpanded(!isExpanded)}
                   className="flex items-center space-x-2 mt-3 text-sm text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 transition-colors"
@@ -70,7 +70,7 @@ const FooterConsent = memo<FooterConsentProps>(({ isConsented, onConsentChange }
                 className="overflow-hidden"
               >
                 <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-gray-200/50 dark:border-gray-700/50 mb-6">
-
+                  
                   <div className="bg-amber-50 dark:bg-amber-900/10 border border-amber-200 dark:border-amber-800 rounded-lg p-4 mb-6">
                     <h3 className="font-semibold text-amber-800 dark:text-amber-200 mb-2 flex items-center space-x-2">
                       <AlertTriangle className="h-5 w-5" />
@@ -86,7 +86,7 @@ const FooterConsent = memo<FooterConsentProps>(({ isConsented, onConsentChange }
                       <Shield className="h-5 w-5 text-blue-600" />
                       <span>Terms of Use</span>
                     </h3>
-
+                    
                     <div className="grid md:grid-cols-2 gap-6">
                       <div className="space-y-4">
                         <div className="flex items-start space-x-3">
@@ -136,8 +136,8 @@ const FooterConsent = memo<FooterConsentProps>(({ isConsented, onConsentChange }
                     <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4">
                       <h4 className="font-medium text-gray-800 dark:text-gray-200 mb-2">Copyright Notice</h4>
                       <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
-                        You acknowledge that downloading copyrighted content without permission may violate copyright laws.
-                        Platform terms of service (YouTube, Instagram, etc.) may prohibit downloading. You assume all legal risks
+                        You acknowledge that downloading copyrighted content without permission may violate copyright laws. 
+                        Platform terms of service (YouTube, Instagram, etc.) may prohibit downloading. You assume all legal risks 
                         and agree to use this tool only with content you own or have explicit permission to download/process.
                       </p>
                     </div>
@@ -160,7 +160,7 @@ const FooterConsent = memo<FooterConsentProps>(({ isConsented, onConsentChange }
                   Privacy & Security First
                 </h4>
                 <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
-                  This is a portfolio demonstration project. All processing happens locally when possible.
+                  This is a portfolio demonstration project. All processing happens locally when possible. 
                   Not designed for commercial use or sensitive data processing.
                 </p>
               </div>
@@ -184,7 +184,7 @@ const FooterConsent = memo<FooterConsentProps>(({ isConsented, onConsentChange }
               </div>
             </div>
             <p className="text-xs text-gray-400 dark:text-gray-600 max-w-2xl mx-auto">
-              © 2024 CreatorHub. Built for educational purposes and skill demonstration.
+              © 2024 CreatorHub. Built for educational purposes and skill demonstration. 
               Users are responsible for ensuring legal compliance with all applicable laws and platform terms.
             </p>
           </div>
@@ -192,8 +192,4 @@ const FooterConsent = memo<FooterConsentProps>(({ isConsented, onConsentChange }
       </div>
     </motion.footer>
   );
-});
-
-FooterConsent.displayName = 'FooterConsent';
-
-export { FooterConsent };
+}
