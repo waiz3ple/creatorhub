@@ -1,16 +1,10 @@
 import { ArrowRight, Sparkles } from 'lucide-react';
 import { motion } from 'motion/react';
-
-// Components
 import { DynamicSearchBar } from './components/DynamicSearchBar';
 import { FooterConsent } from './components/FooterConsent';
 import { ToolModal } from './components/ToolModal';
-
-// Custom hooks
-import { useToolModal } from './hooks';
-
-// Constants and types
 import { TOOLS } from './constants';
+import { useToolModal } from './hooks';
 import type { Tool } from './types';
 
 export default function App() {
@@ -43,18 +37,13 @@ export default function App() {
       >
         {/* Header */}
         <motion.header
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
           className="pt-16 pb-8"
         >
           <div className="container mx-auto px-6 text-center">
-            <motion.div
-              initial={{ scale: 0.9 }}
-              animate={{ scale: 1 }}
-              transition={{ delay: 0.3, duration: 0.4 }}
-              className="flex items-center justify-center space-x-3 mb-6"
-            >
+            <div className="flex items-center justify-center space-x-3 mb-6">
               <div className="relative">
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl blur-lg opacity-30" />
                 <div className="relative p-3 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl">
@@ -69,7 +58,7 @@ export default function App() {
                   Professional Tool Suite
                 </p>
               </div>
-            </motion.div>
+            </div>
           </div>
         </motion.header>
 
@@ -96,9 +85,9 @@ export default function App() {
 
           {/* Tool Grid */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.6 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.4, delay: 0.3 }}
             className="w-full max-w-5xl"
           >
             <div className="text-center mb-12">

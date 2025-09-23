@@ -1,13 +1,13 @@
+import { Download, Music, Settings, Upload, Volume2 } from 'lucide-react';
+import { motion } from 'motion/react';
 import React, { useState } from 'react';
-import { Card } from '../ui/card';
 import { Button } from '../ui/button';
+import { Card } from '../ui/card';
 import { Input } from '../ui/input';
 import { Label } from '../ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '../ui/tabs';
 import { Slider } from '../ui/slider';
-import { Upload, Download, Music, Volume2, Settings } from 'lucide-react';
-import { motion } from 'motion/react';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '../ui/tabs';
 
 export function AudioToolPanel() {
   const [files, setFiles] = useState<File[]>([]);
@@ -35,15 +35,14 @@ export function AudioToolPanel() {
 
   return (
     <div className="space-y-6">
-      {/* File Upload Section */}
-      <Card className="p-6 bg-gradient-to-br from-purple-50 to-violet-50 border-purple-200">
+      <Card className="p-6 bg-purple-50 border-purple-200">
         <div className="text-center">
           <div className="mx-auto w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mb-4">
             <Upload className="h-8 w-8 text-purple-600" />
           </div>
-          <h3 className="text-lg font-semibold text-purple-800 mb-2">Upload Audio Files</h3>
-          <p className="text-purple-600 mb-4">Select MP3, WAV, FLAC, or other audio formats</p>
-          
+          <h3 className="text-lg font-semibold mb-2">Upload Audio Files</h3>
+          <p className="text-gray-600 mb-4">Select MP3, WAV, FLAC, or other audio formats</p>
+
           <Input
             type="file"
             multiple
@@ -51,9 +50,9 @@ export function AudioToolPanel() {
             onChange={handleFileUpload}
             className="w-full max-w-md mx-auto"
           />
-          
+
           {files.length > 0 && (
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               className="mt-4 p-4 bg-white/60 rounded-lg"
@@ -92,7 +91,7 @@ export function AudioToolPanel() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
               >
-                <Card 
+                <Card
                   className={`p-4 cursor-pointer transition-all duration-300 hover:shadow-lg ${
                     outputFormat === format.value ? 'ring-2 ring-purple-500 bg-purple-50' : 'hover:bg-gray-50'
                   }`}
@@ -208,8 +207,8 @@ export function AudioToolPanel() {
 
       {/* Action Buttons */}
       <div className="flex space-x-4">
-        <Button 
-          onClick={handleConvert} 
+        <Button
+          onClick={handleConvert}
           disabled={files.length === 0}
           className="flex-1 bg-gradient-to-r from-purple-500 to-violet-600 hover:from-purple-600 hover:to-violet-700"
         >

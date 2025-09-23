@@ -1,18 +1,6 @@
-import {
-    Code,
-    FileText,
-    Globe,
-    Image,
-    Music2,
-    Palette,
-    Type,
-    Zap
-} from 'lucide-react';
+import { Code, FileText, Globe, Image, Music2, Palette, Type, Zap } from 'lucide-react';
 import { ColorScheme, Tool } from '../types';
 
-/**
- * Application metadata
- */
 export const APP_CONFIG = {
   name: 'CreatorHub',
   version: '1.0.0',
@@ -21,9 +9,6 @@ export const APP_CONFIG = {
   url: 'https://creatorhub.com',
 } as const;
 
-/**
- * Available color schemes for tools
- */
 export const COLOR_SCHEMES: Record<ColorScheme, {
   gradient: string;
   hoverGradient: string;
@@ -66,9 +51,6 @@ export const COLOR_SCHEMES: Record<ColorScheme, {
   },
 } as const;
 
-/**
- * Available tools configuration
- */
 export const TOOLS: Tool[] = [
   {
     id: 'image',
@@ -116,46 +98,16 @@ export const TOOLS: Tool[] = [
   },
 ] as const;
 
-/**
- * Tool categories
- */
 export const TOOL_CATEGORIES = {
-  media: {
-    name: 'Media',
-    description: 'Tools for processing images, audio, and video content',
-    icon: Palette,
-  },
-  productivity: {
-    name: 'Productivity',
-    description: 'Tools to enhance your workflow and productivity',
-    icon: Zap,
-  },
-  design: {
-    name: 'Design',
-    description: 'Creative tools for designers and developers',
-    icon: Code,
-  },
-  utility: {
-    name: 'Utility',
-    description: 'Helpful utilities for various tasks',
-    icon: Globe,
-  },
+  media: { name: 'Media', icon: Palette },
+  productivity: { name: 'Productivity', icon: Zap },
+  design: { name: 'Design', icon: Code },
+  utility: { name: 'Utility', icon: Globe },
 } as const;
 
-/**
- * Animation configuration
- */
 export const ANIMATION_CONFIG = {
-  // Duration values in seconds
-  duration: {
-    fast: 0.2,
-    normal: 0.3,
-    slow: 0.5,
-  },
-
-  // Easing functions
-  easing: {
-    ease: [0.4, 0, 0.2, 1],
+  duration: { fast: 0.2, normal: 0.3, slow: 0.5 },
+  easing: { ease: [0.4, 0, 0.2, 1],
     easeIn: [0.4, 0, 1, 1],
     easeOut: [0, 0, 0.2, 1],
     easeInOut: [0.4, 0, 0.2, 1],
@@ -202,15 +154,10 @@ export const UI_CONFIG = {
   },
 } as const;
 
-/**
- * API Configuration
- */
 export const API_CONFIG = {
   baseUrl: import.meta.env.VITE_API_URL || '/api',
-  timeout: 30000, // 30 seconds
+  timeout: 30000,
   retries: 3,
-
-  // Endpoints
   endpoints: {
     upload: '/upload',
     process: '/process',
@@ -219,19 +166,13 @@ export const API_CONFIG = {
   },
 } as const;
 
-/**
- * File processing limits
- */
 export const FILE_LIMITS = {
-  // File sizes in bytes
   maxFileSize: {
-    image: 50 * 1024 * 1024, // 50MB
-    document: 25 * 1024 * 1024, // 25MB
-    audio: 100 * 1024 * 1024, // 100MB
-    font: 10 * 1024 * 1024, // 10MB
+    image: 50 * 1024 * 1024,
+    document: 25 * 1024 * 1024,
+    audio: 100 * 1024 * 1024,
+    font: 10 * 1024 * 1024,
   },
-
-  // Supported file types
   supportedTypes: {
     image: ['.jpg', '.jpeg', '.png', '.gif', '.webp', '.svg', '.bmp', '.tiff'],
     document: ['.pdf', '.docx', '.doc', '.txt', '.rtf', '.odt'],

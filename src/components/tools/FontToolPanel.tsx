@@ -1,29 +1,29 @@
+import {
+    Download,
+    Globe,
+    Type,
+    Upload,
+    Zap,
+} from "lucide-react";
+import { motion } from "motion/react";
 import React, { useState } from "react";
-import { Card } from "../ui/card";
 import { Button } from "../ui/button";
+import { Card } from "../ui/card";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
 } from "../ui/select";
 import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
+    Tabs,
+    TabsContent,
+    TabsList,
+    TabsTrigger,
 } from "../ui/tabs";
-import {
-  Upload,
-  Download,
-  Type,
-  Globe,
-  Zap,
-} from "lucide-react";
-import { motion } from "motion/react";
 
 export function FontToolPanel() {
   const [files, setFiles] = useState<File[]>([]);
@@ -31,17 +31,13 @@ export function FontToolPanel() {
   const [subsetting, setSubsetting] = useState(false);
   const [unicodeRanges, setUnicodeRanges] = useState("");
 
-  const handleFileUpload = (
-    event: React.ChangeEvent<HTMLInputElement>,
-  ) => {
-    const selectedFiles = Array.from(event.target.files || []);
-    setFiles(selectedFiles);
+  const onFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const newFiles = Array.from(event.target.files || []);
+    setFiles(newFiles);
   };
 
-  const handleConvert = () => {
-    alert(
-      `Converting ${files.length} font file(s) to ${outputFormat.toUpperCase()}`,
-    );
+  const convert = () => {
+    alert(`Converting ${files.length} font file(s) to ${outputFormat.toUpperCase()}`);
   };
 
   const formats = [
@@ -97,7 +93,7 @@ export function FontToolPanel() {
             type="file"
             multiple
             accept=".ttf,.otf,.woff,.woff2"
-            onChange={handleFileUpload}
+            onChange={onFileChange}
             className="w-full max-w-md mx-auto"
           />
 
@@ -328,7 +324,7 @@ export function FontToolPanel() {
       {/* Action Buttons */}
       <div className="flex space-x-4">
         <Button
-          onClick={handleConvert}
+          onClick={convert}
           disabled={files.length === 0}
           className="flex-1 bg-gradient-to-r from-orange-500 to-amber-600 hover:from-orange-600 hover:to-amber-700"
         >

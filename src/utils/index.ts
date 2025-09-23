@@ -1,17 +1,10 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 
-/**
- * Utility function to merge Tailwind CSS classes
- * Combines clsx and tailwind-merge for optimal class handling
- */
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-/**
- * Format file size in human readable format
- */
 export function formatFileSize(bytes: number): string {
   if (bytes === 0) return '0 Bytes';
 
@@ -22,9 +15,6 @@ export function formatFileSize(bytes: number): string {
   return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
 }
 
-/**
- * Format duration in human readable format
- */
 export function formatDuration(seconds: number): string {
   const hours = Math.floor(seconds / 3600);
   const minutes = Math.floor((seconds % 3600) / 60);
@@ -36,17 +26,11 @@ export function formatDuration(seconds: number): string {
   return `${minutes}:${secs.toString().padStart(2, '0')}`;
 }
 
-/**
- * Validate email format
- */
 export function isValidEmail(email: string): boolean {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return emailRegex.test(email);
 }
 
-/**
- * Validate URL format
- */
 export function isValidUrl(url: string): boolean {
   try {
     new URL(url);
@@ -56,24 +40,15 @@ export function isValidUrl(url: string): boolean {
   }
 }
 
-/**
- * Get file extension from filename
- */
 export function getFileExtension(filename: string): string {
   return filename.slice((filename.lastIndexOf('.') - 1 >>> 0) + 2).toLowerCase();
 }
 
-/**
- * Check if file type is supported
- */
 export function isSupportedFileType(filename: string, supportedTypes: string[]): boolean {
   const extension = `.${getFileExtension(filename)}`;
   return supportedTypes.includes(extension);
 }
 
-/**
- * Generate a random ID
- */
 export function generateId(length: number = 8): string {
   const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   let result = '';
@@ -83,9 +58,6 @@ export function generateId(length: number = 8): string {
   return result;
 }
 
-/**
- * Debounce function calls
- */
 export function debounce<T extends (...args: any[]) => any>(
   func: T,
   wait: number
@@ -97,9 +69,6 @@ export function debounce<T extends (...args: any[]) => any>(
   };
 }
 
-/**
- * Throttle function calls
- */
 export function throttle<T extends (...args: any[]) => any>(
   func: T,
   limit: number
@@ -114,9 +83,6 @@ export function throttle<T extends (...args: any[]) => any>(
   };
 }
 
-/**
- * Deep clone an object
- */
 export function deepClone<T>(obj: T): T {
   if (obj === null || typeof obj !== 'object') return obj;
   if (obj instanceof Date) return new Date(obj.getTime()) as T;
@@ -133,16 +99,10 @@ export function deepClone<T>(obj: T): T {
   return obj;
 }
 
-/**
- * Capitalize first letter of string
- */
 export function capitalize(str: string): string {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
-/**
- * Convert string to kebab-case
- */
 export function toKebabCase(str: string): string {
   return str
     .replace(/([a-z])([A-Z])/g, '$1-$2')
@@ -150,9 +110,6 @@ export function toKebabCase(str: string): string {
     .toLowerCase();
 }
 
-/**
- * Convert string to camelCase
- */
 export function toCamelCase(str: string): string {
   return str
     .replace(/(?:^\w|[A-Z]|\b\w)/g, (word, index) =>
@@ -161,24 +118,15 @@ export function toCamelCase(str: string): string {
     .replace(/\s+/g, '');
 }
 
-/**
- * Truncate string with ellipsis
- */
 export function truncate(str: string, length: number): string {
   if (str.length <= length) return str;
   return str.slice(0, length) + '...';
 }
 
-/**
- * Check if device is mobile
- */
 export function isMobile(): boolean {
   return window.innerWidth < 768;
 }
 
-/**
- * Get browser information
- */
 export function getBrowserInfo() {
   const userAgent = navigator.userAgent;
   let browserName = 'Unknown';
@@ -196,9 +144,6 @@ export function getBrowserInfo() {
   };
 }
 
-/**
- * Copy text to clipboard
- */
 export async function copyToClipboard(text: string): Promise<boolean> {
   try {
     await navigator.clipboard.writeText(text);
@@ -209,9 +154,6 @@ export async function copyToClipboard(text: string): Promise<boolean> {
   }
 }
 
-/**
- * Download blob as file
- */
 export function downloadBlob(blob: Blob, filename: string): void {
   const url = URL.createObjectURL(blob);
   const link = document.createElement('a');
